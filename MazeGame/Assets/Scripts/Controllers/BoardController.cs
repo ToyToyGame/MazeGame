@@ -6,10 +6,10 @@ public class BoardController : MonoBehaviour
 {
 
     Tile[,] _tile; // 2차원 배열
+    GameObject _coin;
     [SerializeField]
     public int _boardSize;
-    [SerializeField]
-    public float tileSize = 0.25f;
+    float tileSize = 0.4f;
 
     public Tile getTile(int posY , int posX)
     {
@@ -21,6 +21,7 @@ public class BoardController : MonoBehaviour
     {
         Init(17);
         Render();
+
     }
 
     // Update is called once per frame
@@ -104,6 +105,12 @@ public class BoardController : MonoBehaviour
     {
         tile.tileObject = Managers.Resource.Instantiate($"Tiles/{tile.tileType.ToString()}", gameObject.transform);
         tile.tileObject.transform.position = position;
+        tile.tileObject.transform.localScale = new Vector3(tileSize, tileSize);
+        if (tile.tileType == Define.TileType.End)
+        {
+            _coin = Managers.Resource.Instantiate($"Coin", gameObject.transform);
+            _coin.transform.position = position;
+        }
     }
 
     public void Render()

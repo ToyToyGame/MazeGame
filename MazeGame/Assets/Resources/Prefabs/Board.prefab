@@ -43,9 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9952f4a076b7dda4a8643677f0fbb3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: 11
-  WallPrefab: {fileID: 3938491574889167785, guid: cb5dd1fc3331a714799c4160120332bd, type: 3}
-  EmptyPrefab: {fileID: 1933267277493927811, guid: d85ed62af5ceb164db80bd930adc209d, type: 3}
-  StartPrefab: {fileID: 4011626681988979609, guid: b96e10e836dbf864f87d8b998ece09b9, type: 3}
-  EndPrefab: {fileID: 8976051168311739282, guid: 2921769730d98224a93cb61dac68a598, type: 3}
+  _boardSize: 0
   tileSize: 0.25
