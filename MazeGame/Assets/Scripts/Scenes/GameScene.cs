@@ -9,10 +9,15 @@ public class GameScene : MonoBehaviour
     {
         GameObject board = Managers.Game.Spawn(Define.WorldObject.Board, "Board");
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "Player");
-
+        StartCoroutine(SpawnAfterSeconds(1.5f));
     }
 
-    // Update is called once per frame
+    IEnumerator SpawnAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        GameObject monster = Managers.Game.Spawn(Define.WorldObject.Monster, "Monster");
+
+    }
     void Update()
     {
         

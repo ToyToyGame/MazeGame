@@ -7,6 +7,8 @@ public class BoardController : MonoBehaviour
 
     Tile[,] _tile; // 2차원 배열
     GameObject _coin;
+    float coinSpeed = 2.0f;
+    float coinRiseDist = 1.0f;
     [SerializeField]
     public int _boardSize;
     float tileSize = 0.4f;
@@ -19,7 +21,9 @@ public class BoardController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 사이즈 17짜리 랜덤 배열 생성
         Init(17);
+        // 미로는 안움직이니까 한번만 그리자.
         Render();
 
     }
@@ -101,6 +105,7 @@ public class BoardController : MonoBehaviour
     }
 
 
+
     public void SpawnTile(Vector3 position, Tile tile)
     {
         tile.tileObject = Managers.Resource.Instantiate($"Tiles/{tile.tileType.ToString()}", gameObject.transform);
@@ -128,4 +133,24 @@ public class BoardController : MonoBehaviour
         }
     }
 
+    public void RiseCoin()
+    {
+        // 코인을 위로 이동
+        Vector3 EndTilePos = _tile[_boardSize - 1, _boardSize - 1].tileObject.transform.position;
+        Vector3 dir = _coin.transform.position - EndTilePos;
+        if (dir.magnitude > coinRiseDist)
+        { 
+            Managers.Game.gameState = Define.GameState.End;
+            StartCoroutine(EndAfterSeconds(1.0f));
+            return;
+        }
+
+        float moveDist = Mathf.Clamp(coinSpeed * Time.deltaTime, 0, coinRiseDist);
+        _coin.transform.position += Vector3.up * moveDist;
+    }
+    IEnumerator EndAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Debug.Log("End Game! Go to NextLevel!");
+    }
 }

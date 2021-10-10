@@ -19,4 +19,10 @@ public class Define
         End,
     }
 
+    public enum GameState
+    {
+        Play,
+        End,
+    }
+
 }
