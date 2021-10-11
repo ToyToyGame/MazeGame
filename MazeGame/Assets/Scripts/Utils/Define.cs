@@ -24,5 +24,10 @@ public class Define
         Play,
         End,
     }
-
+    public enum Scene
+    {
+        Unknown,
+        Lobby,
+        Game,
+    }
 }
