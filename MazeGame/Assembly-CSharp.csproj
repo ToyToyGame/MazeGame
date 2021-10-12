@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Utils\Define.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene.cs" />
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Managers\Managers.cs" />
     <Compile Include="Assets\Scripts\Controllers\MoveController.cs" />
@@ -63,10 +64,12 @@
     <Compile Include="Assets\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\Scenes\GameScene.cs" />
     <Compile Include="Assets\Scripts\Managers\ResourceManager.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_Lobby.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Scenes\BaseScene.cs" />
-    <Compile Include="Assets\Scripts\Scenes\LobbyScene.cs" />
-    <Compile Include="Assets\Scripts\UI\UI_Lobby.cs" />
+    <Compile Include="Assets\Scripts\Controllers\ResultUIController.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_Fail.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_Success.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

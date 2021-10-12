@@ -22,6 +22,8 @@ public class Define
     public enum GameState
     {
         Play,
+        Fail,
+        Success,
         End,
     }
     public enum Scene

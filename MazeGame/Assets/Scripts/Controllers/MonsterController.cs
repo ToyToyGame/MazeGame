@@ -30,7 +30,7 @@ public class MonsterController : MoveController
     }
     protected override void Move()
     {
-        if (Managers.Game.gameState == Define.GameState.End)
+        if (Managers.Game.gameState != Define.GameState.Play)
             return;
         if(PosX == player.PosX && PosY == player.PosY)
         {

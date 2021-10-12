@@ -21,7 +21,7 @@ public class PlayerController : MoveController
         if (boardController == null)
             return;
         // 게임 끝
-        if (Managers.Game.gameState == Define.GameState.End)
+        if (Managers.Game.gameState != Define.GameState.Play)
             return;
         if(boardController.getTile(PosY, PosX).tileType == Define.TileType.End)
         {
@@ -127,14 +127,14 @@ public class PlayerController : MoveController
 
     public void RisePlayer()
     {
-        // 코인을 위로 이동
+        // 몬스터에게 잡혔으니 플레이어를 위로 이동
         Vector3 tilePos = boardController.getTile(PosY, PosX).tileObject.transform.position;
         Vector3 dir = transform.position - tilePos;
         if (dir.magnitude > playerRiseDist)
         {
             // TODO
             // 게임 상태 바꾸는게 약간 중구난방인 느낌.. 
-            Managers.Game.gameState = Define.GameState.End;
+            Managers.Game.gameState = Define.GameState.Fail;
             return;
         }
 

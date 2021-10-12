@@ -140,7 +140,7 @@ public class BoardController : MonoBehaviour
         Vector3 dir = _coin.transform.position - EndTilePos;
         if (dir.magnitude > coinRiseDist)
         { 
-            Managers.Game.gameState = Define.GameState.End;
+            Managers.Game.gameState = Define.GameState.Success;
             StartCoroutine(EndAfterSeconds(1.0f));
             return;
         }
