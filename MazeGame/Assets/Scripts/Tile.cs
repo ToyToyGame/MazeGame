@@ -10,3 +10,9 @@ public class Tile
     public GameObject tileObject;
 
 }
+
+
+public class MiniTile : Tile
+{
+    public GameObject darkness;
+}

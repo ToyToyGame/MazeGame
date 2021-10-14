@@ -11,6 +11,7 @@ public class Define
         Board,
         Monster,
         MiniMap,
+        Darkness,
     }
     public enum TileType
     {
