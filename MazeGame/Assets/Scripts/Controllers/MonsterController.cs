@@ -14,7 +14,7 @@ public class MonsterController : MoveController
 {
     List<Pos> path = new List<Pos>();
     PlayerController player;
-    float monsterSleepTime = 0.3f;
+    float monsterSleepTime = 1.0f;
     float _sleepTime = 0.0f;
     int playerPosY;
     int playerPosX;

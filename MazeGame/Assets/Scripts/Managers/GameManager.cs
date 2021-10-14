@@ -8,9 +8,11 @@ public class GameManager
     GameObject _player;
     GameObject _board;
     GameObject _monster;
+    GameObject _miniMap;
     public GameObject GetPlayer() { return _player; }
     public GameObject GetBoard() { return _board; }
     public GameObject GetMonster() { return _monster; }
+    public GameObject GetMiniMap() { return _miniMap; }
     public Define.GameState gameState { get; set; }
 
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
@@ -28,6 +30,9 @@ public class GameManager
                 break;
             case Define.WorldObject.Monster:
                 _monster = go;
+                break;
+            case Define.WorldObject.MiniMap:
+                _miniMap = go;
                 break;
         }
 
