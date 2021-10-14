@@ -72,8 +72,8 @@ public class MonsterController : MoveController
     {
         int[] deltaY = new int[] { -1, 0, 1, 0 };
         int[] deltaX = new int[] { 0, -1, 0, 1 };
-        bool[,] found = new bool[boardController._boardSize, boardController._boardSize];
-        Pos[,] parent = new Pos[boardController._boardSize, boardController._boardSize];
+        bool[,] found = new bool[boardController._boardSize.Height, boardController._boardSize.Width];
+        Pos[,] parent = new Pos[boardController._boardSize.Height, boardController._boardSize.Width];
 
         Queue<Pos> q = new Queue<Pos>();
         q.Enqueue(new Pos(PosY, PosX));
@@ -91,7 +91,7 @@ public class MonsterController : MoveController
                 int nextY = nowY + deltaY[i];
                 int nextX = nowX + deltaX[i];
 
-                if (nextX < 0 || nextX >= boardController._boardSize || nextY < 0 || nextY >= boardController._boardSize)
+                if (nextX < 0 || nextX >= boardController._boardSize.Width || nextY < 0 || nextY >= boardController._boardSize.Height)
                     continue;
                 if (boardController.getTile(nextY, nextX).tileType == Define.TileType.Wall)
                     continue;

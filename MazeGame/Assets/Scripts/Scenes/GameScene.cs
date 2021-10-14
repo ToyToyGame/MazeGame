@@ -8,8 +8,10 @@ public class GameScene : BaseScene
     protected override void Init()
     {
         base.Init();
+
         GameObject board = Managers.Game.Spawn(Define.WorldObject.Board, "Board");
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "Player");
+        Camera.main.gameObject.GetComponent<CameraController>().SetPlayer(player);
         StartCoroutine(SpawnAfterSeconds(1.5f));
     }
     IEnumerator SpawnAfterSeconds(float seconds)

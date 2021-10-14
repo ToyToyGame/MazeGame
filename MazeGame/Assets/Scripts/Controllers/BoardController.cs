@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public class BoardSize
+{
+    public BoardSize(int h, int w) { Height = h; Width = w; }
+    public int Width;
+    public int Height;
+}
 public class BoardController : MonoBehaviour
 {
 
@@ -10,8 +17,9 @@ public class BoardController : MonoBehaviour
     float coinSpeed = 2.0f;
     float coinRiseDist = 1.0f;
     [SerializeField]
-    public int _boardSize;
+    public BoardSize _boardSize;
     float tileSize = 0.4f;
+
 
     public Tile getTile(int posY , int posX)
     {
@@ -22,7 +30,7 @@ public class BoardController : MonoBehaviour
     void Start()
     {
         // 사이즈 17짜리 랜덤 배열 생성
-        Init(17);
+        Init(21,41);
         // 미로는 안움직이니까 한번만 그리자.
         Render();
 
@@ -36,12 +44,12 @@ public class BoardController : MonoBehaviour
 
 
 
-    public void Init(int size)
+    public void Init(int height, int width)
     {
-        if (size % 2 == 0)
+        if (width % 2 == 0 || height % 2 == 0)
             return;
-        _tile = new Tile[size, size];
-        _boardSize = size;
+        _tile = new Tile[height, width];
+        _boardSize = new BoardSize(height,width);
 
 
         GenerateBySideWinder();
@@ -51,9 +59,9 @@ public class BoardController : MonoBehaviour
     {
         // 일단, 길을 다 막아버리는 작업
         
-        for (int y = 0; y < _boardSize; y++)
+        for (int y = 0; y < _boardSize.Height; y++)
         {
-            for (int x = 0; x < _boardSize; x++)
+            for (int x = 0; x < _boardSize.Width; x++)
             {
                 Tile tile = new Tile();
                 if (x % 2 == 0 || y % 2 == 0)
@@ -67,21 +75,21 @@ public class BoardController : MonoBehaviour
         // 
         // 랜덤으로 우측 혹은 아래로 길을 뚫는 작업
         System.Random rand = new System.Random();
-        for (int y = 0; y < _boardSize; y++)
+        for (int y = 0; y < _boardSize.Height; y++)
         {
             int count = 1;
-            for (int x = 0; x < _boardSize; x++)
+            for (int x = 0; x < _boardSize.Width; x++)
             {
                 if (x % 2 == 0 || y % 2 == 0)
                     continue;
-                if (y == _boardSize - 2 && x == _boardSize - 2)
+                if (y == _boardSize.Height - 2 && x == _boardSize.Width - 2)
                     continue;
-                if (y == _boardSize - 2)
+                if (y == _boardSize.Height - 2)
                 {
                     _tile[y, x + 1].tileType = Define.TileType.Empty;
                     continue;
                 }
-                if (x == _boardSize - 2)
+                if (x == _boardSize.Width - 2)
                 {
                     _tile[y + 1, x].tileType = Define.TileType.Empty;
                     continue;
@@ -101,7 +109,7 @@ public class BoardController : MonoBehaviour
             }
         }
         _tile[0, 1].tileType = Define.TileType.Start;
-        _tile[_boardSize - 2, _boardSize - 2].tileType = Define.TileType.End;
+        _tile[_boardSize.Height - 2, _boardSize.Width - 2].tileType = Define.TileType.End;
     }
 
 
@@ -121,10 +129,10 @@ public class BoardController : MonoBehaviour
     public void Render()
     {
         Vector3 position = new Vector3();
-        float middlePosition = _boardSize * tileSize * 0.5f;
-        for (int y = 0; y < _boardSize; y++)
+        float middlePosition = (_boardSize.Height + _boardSize.Width) * tileSize * 0.5f;
+        for (int y = 0; y < _boardSize.Height; y++)
         {
-            for (int x = 0; x < _boardSize; x++)
+            for (int x = 0; x < _boardSize.Width; x++)
             {
                 position.x = -middlePosition + tileSize * x;
                 position.y = middlePosition +- 1 * tileSize * y;
@@ -136,7 +144,7 @@ public class BoardController : MonoBehaviour
     public void RiseCoin()
     {
         // 코인을 위로 이동
-        Vector3 EndTilePos = _tile[_boardSize - 1, _boardSize - 1].tileObject.transform.position;
+        Vector3 EndTilePos = _tile[_boardSize.Height - 1, _boardSize.Width - 1].tileObject.transform.position;
         Vector3 dir = _coin.transform.position - EndTilePos;
         if (dir.magnitude > coinRiseDist)
         { 

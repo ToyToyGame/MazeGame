@@ -10,6 +10,7 @@ public class Define
         Player,
         Board,
         Monster,
+        MiniMap,
     }
     public enum TileType
     {
