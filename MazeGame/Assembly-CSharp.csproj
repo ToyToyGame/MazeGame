@@ -69,10 +69,13 @@
     <Compile Include="Assets\Scripts\Controllers\ResultUIController.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Lobby.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Controllers\DarknessController.cs" />
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controllers\MiniMapController.cs" />
     <Compile Include="Assets\Scripts\Scenes\BaseScene.cs" />
-    <Compile Include="Assets\Scripts\Controllers\DarknessController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\EventGameController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\SafeBarController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\StopBarController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

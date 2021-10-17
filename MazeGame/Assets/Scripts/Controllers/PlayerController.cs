@@ -9,6 +9,7 @@ public class PlayerController : MoveController
     KeyCode _pressedKey = KeyCode.None;
     float playerRiseDist = 0.3f;
     float playerSpeed = 2.0f;
+    public Define.MoverStatus playerStatus = Define.MoverStatus.Run;
 
     protected override void Init()
     {
@@ -23,6 +24,8 @@ public class PlayerController : MoveController
         // ∞‘¿” ≥°
         if (Managers.Game.gameState != Define.GameState.Play)
             return;
+        if (playerStatus == Define.MoverStatus.Rise)
+            RisePlayer();
         if(boardController.getTile(PosY, PosX).tileType == Define.TileType.End)
         {
             boardController.RiseCoin();
@@ -121,7 +124,7 @@ public class PlayerController : MoveController
     {
         Animator anim = GetComponent<Animator>();
         anim.Play("Player_Jump");
-        RisePlayer();
+        playerStatus = Define.MoverStatus.Rise;
     }
 
 

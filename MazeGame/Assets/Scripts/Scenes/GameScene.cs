@@ -15,6 +15,8 @@ public class GameScene : BaseScene
         monster.SetActive(false);
         GameObject miniMap = Managers.Game.Spawn(Define.WorldObject.MiniMap, "MiniMap");
         GameObject darkness = Managers.Game.Spawn(Define.WorldObject.Darkness, "Darkness");
+        GameObject MonsterAvoidingEventGame = Managers.Game.Spawn(Define.WorldObject.MonsterAvoidEventGame, "EventGame/EventGame");
+        MonsterAvoidingEventGame.SetActive(false);
         Camera.main.gameObject.GetComponent<CameraController>().SetPlayer(player);
         StartCoroutine(SpawnAfterSeconds(1.5f,monster));
     }

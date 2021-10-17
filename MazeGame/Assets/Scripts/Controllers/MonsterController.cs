@@ -15,10 +15,16 @@ public class MonsterController : MoveController
     List<Pos> path = new List<Pos>();
     PlayerController player;
     float monsterSleepTime = 0.5f;
+    float monsterRiseSleepTime = 3.5f;
     float _sleepTime = 0.0f;
     int playerPosY;
     int playerPosX;
     int currentPathIdx = 0;
+    float monsterRiseDist = 0.3f;
+    float monsterSpeed = 1.0f;
+    public Define.MoverStatus monsterStatus = Define.MoverStatus.Run;
+
+    EventGameController monsterEventGame;
     protected override void Init()
     {
         base.Init();
@@ -26,15 +32,25 @@ public class MonsterController : MoveController
         BFS(player.PosY, player.PosX);
         playerPosX = player.PosX;
         playerPosY = player.PosY;
+        monsterEventGame = Managers.Game.GetMonsterEventGame().GetComponent<EventGameController>();
 
     }
     protected override void Move()
     {
         if (Managers.Game.gameState != Define.GameState.Play)
             return;
-        if(PosX == player.PosX && PosY == player.PosY)
+        if(monsterStatus == Define.MoverStatus.Idle)
+            return;
+        if (monsterStatus == Define.MoverStatus.Rise)
         {
-            player.KillPlayer();
+            RiseMonster();
+            return;
+        }
+        if (PosX == player.PosX && PosY == player.PosY)
+        {
+            _sleepTime = 0.0f;
+            monsterEventGame.StartEventGame();
+            monsterStatus = Define.MoverStatus.Idle;
             return;
         }
         if (monsterSleepTime > _sleepTime)
@@ -124,5 +140,30 @@ public class MonsterController : MoveController
 
         path.Add(new Pos(y, x));
         path.Reverse();
+    }
+
+
+    public void RiseMonster()
+    {
+        // 플레이어가 이벤트 게임 성공해서 몬스터는 좀 쉬었다가 이동
+        Vector3 tilePos = boardController.getTile(PosY, PosX).tileObject.transform.position;
+        Vector3 dir = transform.position - tilePos;
+        if (dir.magnitude > monsterRiseDist)
+        {
+            if(monsterRiseSleepTime < _sleepTime)
+            {
+                transform.position = boardController.getTile(PosY, PosX).tileObject.transform.position;
+                monsterStatus = Define.MoverStatus.Run;
+                _sleepTime = 0.0f;
+                return;
+
+            }
+            _sleepTime += Time.deltaTime;
+        }
+        else
+        {
+            float moveDist = Mathf.Clamp(monsterSpeed * Time.deltaTime, 0, monsterRiseDist);
+            gameObject.transform.position += Vector3.up * moveDist;
+        }
     }
 }

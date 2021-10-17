@@ -9,10 +9,13 @@ public class GameManager
     GameObject _board;
     GameObject _monster;
     GameObject _miniMap;
+    GameObject _monsterAvoidEventGame;
     public GameObject GetPlayer() { return _player; }
     public GameObject GetBoard() { return _board; }
     public GameObject GetMonster() { return _monster; }
     public GameObject GetMiniMap() { return _miniMap; }
+
+    public GameObject GetMonsterEventGame() { return _monsterAvoidEventGame; }
     public Define.GameState gameState { get; set; }
 
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
@@ -33,6 +36,10 @@ public class GameManager
                 break;
             case Define.WorldObject.MiniMap:
                 _miniMap = go;
+                break;
+
+            case Define.WorldObject.MonsterAvoidEventGame:
+                _monsterAvoidEventGame = go;
                 break;
         }
 
