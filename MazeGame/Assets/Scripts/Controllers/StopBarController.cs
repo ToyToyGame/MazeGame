@@ -23,7 +23,7 @@ public class StopBarController : MonoBehaviour
     float minGagePosX = -7.0f;
     float maxGagePosX = 7.0f;
     Vector3 moveSign = Vector3.right;
-    float moveSpeed = 3.0f;
+    float moveSpeed = 12.0f;
     StopResult avoidMonsterResult = StopResult.None;
     EventGameController eventGame;
     void Start()

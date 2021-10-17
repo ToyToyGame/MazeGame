@@ -13,6 +13,8 @@ public class GameScene : BaseScene
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "Player");
         GameObject monster = Managers.Game.Spawn(Define.WorldObject.Monster, "Monster");
         monster.SetActive(false);
+        GameObject bubble = Managers.Game.Spawn(Define.WorldObject.Bubble, "Bubble");
+        bubble.SetActive(false);
         GameObject miniMap = Managers.Game.Spawn(Define.WorldObject.MiniMap, "MiniMap");
         GameObject darkness = Managers.Game.Spawn(Define.WorldObject.Darkness, "Darkness");
         GameObject MonsterAvoidingEventGame = Managers.Game.Spawn(Define.WorldObject.MonsterAvoidEventGame, "EventGame/EventGame");

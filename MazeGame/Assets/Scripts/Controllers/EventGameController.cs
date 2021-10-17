@@ -18,6 +18,7 @@ public class EventGameController : MonoBehaviour
     public void StartEventGame()
     {
         gameObject.SetActive(true);
+        
         eventGameStatus = Define.EventGameStatus.Start;
         gameObject.transform.parent = Camera.main.transform;
         gameObject.transform.position = Camera.main.ViewportToWorldPoint(new Vector2(0.0f, 0.0f)) + new Vector3(0, barPosition, 10.0f) ;

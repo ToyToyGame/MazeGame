@@ -10,10 +10,12 @@ public class GameManager
     GameObject _monster;
     GameObject _miniMap;
     GameObject _monsterAvoidEventGame;
+    GameObject _bubble;
     public GameObject GetPlayer() { return _player; }
     public GameObject GetBoard() { return _board; }
     public GameObject GetMonster() { return _monster; }
     public GameObject GetMiniMap() { return _miniMap; }
+    public GameObject GetBubble() { return _bubble; }
 
     public GameObject GetMonsterEventGame() { return _monsterAvoidEventGame; }
     public Define.GameState gameState { get; set; }
@@ -40,6 +42,10 @@ public class GameManager
 
             case Define.WorldObject.MonsterAvoidEventGame:
                 _monsterAvoidEventGame = go;
+                break;
+
+            case Define.WorldObject.Bubble:
+                _bubble = go;
                 break;
         }
 

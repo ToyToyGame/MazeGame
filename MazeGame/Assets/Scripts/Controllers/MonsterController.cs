@@ -14,17 +14,18 @@ public class MonsterController : MoveController
 {
     List<Pos> path = new List<Pos>();
     PlayerController player;
-    float monsterSleepTime = 0.5f;
-    float monsterRiseSleepTime = 3.5f;
+    float monsterSleepTime = 0.3f;
+    float monsterRiseSleepTime = 2.0f;
     float _sleepTime = 0.0f;
     int playerPosY;
     int playerPosX;
     int currentPathIdx = 0;
     float monsterRiseDist = 0.3f;
-    float monsterSpeed = 1.0f;
+    float monsterSpeed = 2.0f;
     public Define.MoverStatus monsterStatus = Define.MoverStatus.Run;
 
     EventGameController monsterEventGame;
+    BubbleController bubble;
     protected override void Init()
     {
         base.Init();
@@ -33,7 +34,7 @@ public class MonsterController : MoveController
         playerPosX = player.PosX;
         playerPosY = player.PosY;
         monsterEventGame = Managers.Game.GetMonsterEventGame().GetComponent<EventGameController>();
-
+        bubble = Managers.Game.GetBubble().GetComponent<BubbleController>();
     }
     protected override void Move()
     {
@@ -43,6 +44,7 @@ public class MonsterController : MoveController
             return;
         if (monsterStatus == Define.MoverStatus.Rise)
         {
+            player.playerStatus = Define.MoverStatus.Run;
             RiseMonster();
             return;
         }
@@ -51,6 +53,7 @@ public class MonsterController : MoveController
             _sleepTime = 0.0f;
             monsterEventGame.StartEventGame();
             monsterStatus = Define.MoverStatus.Idle;
+            player.playerStatus = Define.MoverStatus.Idle;
             return;
         }
         if (monsterSleepTime > _sleepTime)
@@ -148,6 +151,7 @@ public class MonsterController : MoveController
         // 플레이어가 이벤트 게임 성공해서 몬스터는 좀 쉬었다가 이동
         Vector3 tilePos = boardController.getTile(PosY, PosX).tileObject.transform.position;
         Vector3 dir = transform.position - tilePos;
+
         if (dir.magnitude > monsterRiseDist)
         {
             if(monsterRiseSleepTime < _sleepTime)
@@ -155,6 +159,7 @@ public class MonsterController : MoveController
                 transform.position = boardController.getTile(PosY, PosX).tileObject.transform.position;
                 monsterStatus = Define.MoverStatus.Run;
                 _sleepTime = 0.0f;
+                bubble.EndBubble();
                 return;
 
             }
@@ -165,5 +170,7 @@ public class MonsterController : MoveController
             float moveDist = Mathf.Clamp(monsterSpeed * Time.deltaTime, 0, monsterRiseDist);
             gameObject.transform.position += Vector3.up * moveDist;
         }
+        bubble.StartBubble();
+
     }
 }

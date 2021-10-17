@@ -26,6 +26,7 @@ public class Define
         MiniMap,
         Darkness,
         MonsterAvoidEventGame,
+        Bubble,
     }
     public enum TileType
     {

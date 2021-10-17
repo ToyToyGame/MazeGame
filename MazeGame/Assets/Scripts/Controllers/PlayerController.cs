@@ -24,6 +24,8 @@ public class PlayerController : MoveController
         // ∞‘¿” ≥°
         if (Managers.Game.gameState != Define.GameState.Play)
             return;
+        if (playerStatus == Define.MoverStatus.Idle)
+            return;
         if (playerStatus == Define.MoverStatus.Rise)
             RisePlayer();
         if(boardController.getTile(PosY, PosX).tileType == Define.TileType.End)
